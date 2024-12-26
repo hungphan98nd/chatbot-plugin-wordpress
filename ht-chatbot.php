@@ -32,9 +32,6 @@ function ht_chatbot_deactivate() {
     // Perform actions when deactivating plugin
 }
 
-// reaquire file
-require_once(HT_CHATBOT_PLUGIN_PATH . 'includes/admin-page.php');
-
 function chatbot_add_admin_menu() {
     $capability = (current_user_can('shop_manager')) ? 'shop_manager' : 'manage_options';
 
@@ -149,3 +146,7 @@ function create_books_table() {
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql);
 }
+
+// reaquire file
+require_once(HT_CHATBOT_PLUGIN_PATH . 'includes/admin-page.php');
+require_once (HT_CHATBOT_PLUGIN_PATH . 'ht-chatbot-books.php');
