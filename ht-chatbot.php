@@ -82,13 +82,13 @@ function ht_chatbox_render_html() { ?>
     		</div>
     		<div class="ai-chatbot-questions-default">
     			<div class="lable">Các câu hỏi thường gặp:</div>
-    			<div class="ai-chatbot-questions">Tôi cần hỗ trợ để chọn tên miền</div>
-    			<div class="ai-chatbot-questions">Tôi muốn chuyển tên miền</div>
-    			<div class="ai-chatbot-questions">Tôi muốn tạo trang web</div>
+    			<div class="ai-chatbot-questions">Tôi muốn tìm sách của nhà xuất bản Giáo Dục</div>
+    			<div class="ai-chatbot-questions">Tôi muốn tìm sách về lĩnh vực Khoa Học</div>
+    			<div class="ai-chatbot-questions">Tôi muốn tìm sách Thời gian là vàng</div>
     		</div>
     	</div>
     	<div id="chat-footer" class="chat-footer">
-    		<input type="text" id="chatInput" placeholder="Nhập tin nhắn..." autocomplete="off">
+    		<input type="text" id="chatInput" placeholder="Nhập câu hỏi..." autocomplete="off">
     		<button id="sendButton">
     			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
     				<path d="M2,21L23,12L2,3v7l15,2l-15,2V21z"/>
