@@ -1,0 +1,234 @@
+
+:root {
+  --cb-primary-color: #673de6; 
+  --cb-secondary-color: #1d1e20;
+  --cb-primary-bg-color: #f1f3f6;
+  --cb-border-color: #dad9da;
+}
+
+body {
+  position: relative;
+}
+
+.chatbox {
+  width: 360px;
+  height: 520px;
+  background: #fff;
+  filter: drop-shadow(0 0 12px rgba(29, 30, 32, .16));
+  border: 1px solid var(--cb-border-color);
+  border-radius: 6px;
+  overflow: hidden;
+  position: fixed;
+  right: 20px;
+  bottom: 90px;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all .3s;
+  z-index: 998;
+}
+
+.chat-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  cursor: pointer;
+  width: 56px;
+  height: 56px;
+  border-radius: 6px;
+  background-color: var(--cb-primary-color);
+  z-index: 999;
+  transition: all .3s;
+}
+
+.chatbox.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/*.chat-toggle svg {
+  transition: all .3s;
+}
+
+.chat-toggle:hover {
+  background-color: #fff;
+  border: 1px solid var(--cb-primary-color);
+}
+
+.chat-toggle:hover svg {
+  fill: var(--cb-primary-color);
+}*/
+
+.chat-header {
+  background: var(--cb-primary-bg-color);
+  color: #fff;
+  padding: 8px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--cb-secondary-color);
+}
+
+.logo-main {
+  max-width: 22px;
+  margin-right: 5px;
+  border-radius: 3px;
+  transform: translateY(-1px);
+}
+
+.chatbot-ai-button-close {
+  border-bottom: none;
+  font-size: 26px;
+  font-weight: 100;
+  color: #515151;
+  transition: all .3s;
+}
+
+.chatbot-ai-button-close:hover {
+  transform: rotate(90deg);
+  color: var(--cb-primary-color);
+}
+
+.chat-body {
+  flex: 1;
+  padding: 10px 15px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+
+  height: 100%;
+  overflow-y: auto;
+}
+
+.message {
+  margin: 8px 0;
+  padding: 8px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  max-width: 100%;
+  line-height: 1.4;
+  color: var(--cb-secondary-color) !important;
+}
+
+.message.received {
+  background: var(--cb-primary-bg-color);
+  align-self: flex-start;
+  max-width: 100%;
+}
+
+.message.default {
+  position: relative;
+  padding-left: 26px;
+}
+
+.message.default:before {
+  position: absolute;
+  content: '';
+  left: 12px;
+  top: 12px;
+  width: 8px;
+  height: 8px;
+  border-radius: 100%;
+  background-color: var(--cb-primary-color);
+}
+
+.message.sent {
+  background: var(--cb-primary-color);
+  color: white !important;
+  align-self: flex-end;
+}
+
+.ai-chatbot-questions-default {
+  margin-bottom: 5px;
+}
+
+.ai-chatbot-questions-default .lable {
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 400;
+  margin: 10px 0 5px;
+}
+
+.ai-chatbot-questions {
+  border: 1px solid var(--cb-border-color);
+  border-radius: 999px;
+  cursor: default;
+  margin-top: 8px;
+  padding: 9px 15px;
+  font-size: 13px;
+  line-height: 1.4;
+  font-weight: 400;
+  transition: border-color .2s ease-in-out;
+  cursor: pointer;
+}
+
+.ai-chatbot-questions:hover {
+  border-color: var(--cb-primary-color);
+}
+
+.chat-footer {
+  display: flex;
+  padding: 10px 15px;
+  background: var(--cb-primary-bg-color);
+  border-top: 1px solid var(--cb-border-color);
+  align-items: center;
+  position: relative;
+  align-items: flex-end;
+  display: flex;
+  flex-direction: column;
+}
+
+.chat-footer input {
+  width: 100%;
+  height: 50px;
+  padding: 10px 15px;
+  border: 1px solid var(--cb-border-color) !important;
+  border-radius: 8px;
+  background: #fff;
+  font-size: 14px;
+  box-shadow: none;
+}
+
+.chat-footer button {
+  background-color: var(--cb-primary-bg-color);
+  border: none;
+  padding: 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  bottom: 15px;
+  width: 40px;
+  background-color: var(--cb-primary-color);
+  transition: all .3s;
+}
+
+.chat-footer button svg {
+  fill: #FFF;
+  transition: all .3s;
+}
+
+.chat-footer button:hover {
+  background: var(--cb-primary-bg-color);
+  border: 1px solid var(--cb-border-color);
+} 
+
+.chat-footer button:hover svg {
+  fill: var(--cb-primary-color);
+}
+
+.chat-footer input:hover,
+.chat-footer input:active {
+  border-color: var(--cb-primary-color) !important;
+}
