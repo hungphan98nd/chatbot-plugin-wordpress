@@ -54,7 +54,6 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-
 // Event click icon chatbot 
 document.addEventListener('DOMContentLoaded', () => {
   const chatToggle = document.querySelector('.chat-toggle');
