@@ -66,7 +66,7 @@ function ht_chatbox_render_html() { ?>
 	    </svg>
     </div>
 
-    <div class="chatbox">
+    <div id="chatbot-message" class="chatbox">
     	<div class="chat-header">
     		<div class="header-left">
     			<?php $img_url = plugins_url('assets/images/logo.png', __FILE__); ?>
@@ -86,7 +86,7 @@ function ht_chatbox_render_html() { ?>
     			<div class="ai-chatbot-questions">Tôi muốn tạo trang web</div>
     		</div>
     	</div>
-    	<div class="chat-footer">
+    	<div id="chat-footer" class="chat-footer">
     		<input type="text" id="chatInput" placeholder="Nhập tin nhắn..." autocomplete="off">
     		<button id="sendButton">
     			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="white" width="24px" height="24px">
@@ -100,12 +100,11 @@ function ht_chatbox_render_html() { ?>
 add_action('wp_footer', 'ht_chatbox_render_html');
 
 function ht_chatbot_enqueue_assets() {
-    wp_enqueue_style('ht-chatbot-style', plugin_dir_url(__FILE__) . 'assets/css/chatbox-style.css');
-    wp_enqueue_style('ht-admin-style', plugin_dir_url(__FILE__) . 'assets/css/admin-style.css');
+    wp_enqueue_style('ht-chatbot-style', plugin_dir_url(__FILE__) . 'assets/css/chatbox-style.css' , array(), null, 'all');
+    wp_enqueue_style('ht-admin-style', plugin_dir_url(__FILE__) . 'assets/css/admin-style.css' , array(), null, 'all');
     wp_enqueue_script('ht-chatbot-script', plugin_dir_url(__FILE__) . 'assets/js/main.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'ht_chatbot_enqueue_assets');
-
 
 // Create new table for database
 function chatbot_conversations_table() {
