@@ -1,35 +1,33 @@
-
-
 jQuery(document).ready(function ($) {
-  // Lắng nghe sự kiện khi người dùng nhấn nút gửi
-  $('#sendButton').on('click', function () {
-  var question = $('#chatInput').val().trim();
 
-  console.log('Function call ajax khi click #sendButton');
+  // Function process event click
+  function sendMessage() {
+    const input = document.getElementById('chatInput');
+    var question = input.value.trim();
 
-  if (question) {
-    // Hiển thị câu hỏi của người dùng trong cửa sổ chat
-    $('#chatbot-message .chat-body').append('<div class="message sent">' + question + '</div>');
-    $('#chatInput').val(''); // Xóa ô nhập sau khi gửi câu hỏi
+    console.log('Function 1', question);
 
-      // Gửi câu hỏi cho server để xử lý
+    if (question) {
+      // Display quesion to Chatbody
+      $('#chatbot-message .chat-body').append('<div class="message sent">' + question + '</div>');
+      $('#chatInput').val(''); // clear input text
+
       $.ajax({
-        url: chatbotAjax.ajaxUrl, // URL gửi yêu cầu AJAX
+        url: chatbotAjax.ajaxUrl,
         type: 'POST',
         data: {
-          action: 'chatbot_search_books', // Tên action đã đăng ký ở PHP
-          question: question
+          action: 'chatbot_search_books',
+          question: question,
         },
         success: function (response) {
           if (response.success) {
             var resultsHtml = '<div class="message received">Dưới đây là kết quả tìm kiếm:</div>';
             response.data.forEach(function (book) {
               resultsHtml += `
-              <div class="book-item">
-              <h3>${book.title}</h3>
-              <p><strong>Nhà xuất bản:</strong> ${book.publisherName}</p>
-              </div>
-              `;
+                <div class="book-item">
+                <h3>${book.title}</h3>
+                </div>
+                `;
             });
             $('#chatbot-message .chat-body').append(resultsHtml);
           } else {
@@ -38,15 +36,37 @@ jQuery(document).ready(function ($) {
         },
         error: function () {
           $('#chatbot-message .chat-body').append('<div class="message received">Có lỗi xảy ra. Vui lòng thử lại sau.</div>');
-        }
+        },
       });
+    }
+  }
+
+  // Function to remove default question
+  function removeDefaultQuestion() {
+    var defaultQuestionDiv = document.querySelector('.ai-chatbot-questions-default');
+    if (defaultQuestionDiv) {
+      defaultQuestionDiv.remove();
+    }
+  }
+
+  // Click sendButton
+  $('#sendButton').on('click', function() {
+    removeDefaultQuestion(); 
+    sendMessage();
+  });
+
+  // Enter sendButton
+  $('#chatInput').on('keydown', function (e) {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      removeDefaultQuestion();
+      sendMessage();
     }
   });
 
-  // Lắng nghe sự kiện khi người dùng nhấn Enter để gửi câu hỏi
-  $('#chatInput').on('keypress', function (e) {
-    if (e.which == 13) { // Nếu nhấn Enter
-      $('#sendButton').click();
-    }
-  });
+
+
+
+
+
 });

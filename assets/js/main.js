@@ -1,58 +1,60 @@
 // script.js
-document.addEventListener('DOMContentLoaded', () => {
-  const sendButton = document.getElementById('sendButton');
-  const input = document.getElementById('chatInput');
-  const chatBody = document.querySelector('.chat-body');
+// document.addEventListener('DOMContentLoaded', () => {
+//   const sendButton = document.getElementById('sendButton');
+//   const input = document.getElementById('chatInput');
+//   const chatBody = document.querySelector('.chat-body');
 
-  if (!sendButton || !input || !chatBody) {
-    console.error('Không tìm thấy các phần tử cần thiết trên trang.');
-    return;
-  }
+//   if (!sendButton || !input || !chatBody) {
+//     console.error('Không tìm thấy các phần tử cần thiết trên trang.');
+//     return;
+//   }
 
-  // Function send Message
-  function sendMessage() {
-    const message = input.value.trim();
-    if (!message) return;
+  // // Function send Message
+  // function sendMessage() {
+  //   const message = input.value.trim();
+  //   console.log('Main ', message);
 
-    // Remove default question when sending new message
-    const defaultQuestionDiv = document.querySelector('.ai-chatbot-questions-default');
-    if (defaultQuestionDiv) {
-      defaultQuestionDiv.remove(); 
-    }
+  //   if (!message) return;
 
-    const newMessage = document.createElement('div');
-    newMessage.classList.add('message', 'sent');
-    newMessage.textContent = message;
-    chatBody.appendChild(newMessage);
+  //   // Remove default question when sending new message
+  //   const defaultQuestionDiv = document.querySelector('.ai-chatbot-questions-default');
+  //   if (defaultQuestionDiv) {
+  //     defaultQuestionDiv.remove(); 
+  //   }
 
-    scrollToBottom();
+  //   const newMessage = document.createElement('div');
+  //   newMessage.classList.add('message', 'sent');
+  //   newMessage.textContent = message;
+  //   chatBody.appendChild(newMessage);
 
-    input.value = ''; // clear message content in input after sending
+  //   scrollToBottom();
 
-    // Auto reply after 1 second
-    setTimeout(() => {
-      const reply = document.createElement('div');
-      reply.classList.add('message', 'received');
-      reply.textContent = 'Cảm ơn bạn đã liên hệ. Nhân viên trực của chúng tôi sẽ phản hồi ngay!';
-      chatBody.appendChild(reply);
-      scrollToBottom();
-    }, 500);
-  }
+  //   input.value = ''; // clear message content in input after sending
 
-  // Function to scroll down to the bottom of the chatBody
-  function scrollToBottom() {
-    chatBody.scrollTop = chatBody.scrollHeight;
-  }
+  //   // Auto reply after 0.5 second
+  //   setTimeout(() => {
+  //     const reply = document.createElement('div');
+  //     reply.classList.add('message', 'received');
+  //     reply.textContent = 'Cảm ơn bạn đã liên hệ. Nhân viên trực của chúng tôi sẽ phản hồi ngay!';
+  //     chatBody.appendChild(reply);
+  //     scrollToBottom();
+  //   }, 500);
+  // }
 
-  sendButton.addEventListener('click', sendMessage);
+  // // Function to scroll down to the bottom of the chatBody
+  // function scrollToBottom() {
+  //   chatBody.scrollTop = chatBody.scrollHeight;
+  // }
 
-  input.addEventListener('keydown', (event) => {
-    if (event.key === 'Enter') {
-      event.preventDefault();
-      sendMessage();
-    }
-  });
-});
+  // sendButton.addEventListener('click', sendMessage);
+
+  // input.addEventListener('keydown', (event) => {
+  //   if (event.key === 'Enter') {
+  //     event.preventDefault();
+  //     sendMessage();
+  //   }
+  // });
+// });
 
 // Event click icon chatbot 
 document.addEventListener('DOMContentLoaded', () => {

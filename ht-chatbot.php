@@ -79,9 +79,9 @@ function ht_chatbox_render_html() { ?>
     		</div>
     		<div class="ai-chatbot-questions-default">
     			<div class="lable">Các câu hỏi thường gặp:</div>
-    			<div class="ai-chatbot-questions">Tôi muốn tìm sách của nhà xuất bản Giáo Dục</div>
-    			<div class="ai-chatbot-questions">Tôi muốn tìm sách về lĩnh vực Khoa Học</div>
-    			<div class="ai-chatbot-questions">Tôi muốn tìm sách Thời gian là vàng</div>
+    			<div class="ai-chatbot-questions questions-default-1">Tôi muốn tìm sách của nhà xuất bản Giáo Dục</div>
+    			<div class="ai-chatbot-questions questions-default-2">Tôi muốn tìm sách về lĩnh vực Khoa Học</div>
+    			<div class="ai-chatbot-questions questions-default-3">Tôi muốn tìm sách Thời gian là vàng</div>
     		</div>
     	</div>
     	<div id="chat-footer" class="chat-footer">
