@@ -247,3 +247,47 @@ body {
   border-color: var(--cb-primary-color) !important;
   outline: none;
 }
+
+/* Style message search */
+#chatbot-message .message-search {
+  padding: 15px 15px;
+}
+
+#chatbot-message .label-message {
+  font-weight: 500;
+}
+
+#chatbot-message ul {
+  margin: 5px 0 0 25px;
+}
+
+#chatbot-message .list-item-search {
+  list-style: none;
+  margin-bottom: 5px;
+  position: relative;
+}
+
+#chatbot-message .list-item-search:before {
+  position: absolute;
+  content: '';
+  top: 7px;
+  left: -15px;
+  width: 6px;
+  height: 6px;
+  border-radius: 100%;
+  background-color: var(--cb-primary-color);
+}
+
+#chatbot-message .list-item-search:last-child {
+  margin-bottom: 0;
+}
+
+#chatbot-message .list-item-search a {
+  color: var(--cb-secondary-color);
+  text-decoration: underline;
+  line-height: normal;
+}
+
+#chatbot-message .list-item-search a:hover {
+  color: var(--cb-primary-color);
+}

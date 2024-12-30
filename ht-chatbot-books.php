@@ -1,10 +1,10 @@
 
 <?php
-// Hàm xử lý tìm kiếm sách theo câu hỏi của người dùng
+// Function to search data according to user's question
 function chatbot_search_books_by_question() {
     global $wpdb;
 
-    // Kiểm tra câu hỏi có chứa từ khóa "sách của nhà xuất bản" hay không
+    // Kiểm tra câu hỏi có chứa từ khóa "Nhà xuất bản" hay không
     if (!isset($_POST['question']) || empty($_POST['question'])) {
         wp_send_json_error('Không có câu hỏi.');
         wp_die();
@@ -12,46 +12,42 @@ function chatbot_search_books_by_question() {
 
     $question = sanitize_text_field($_POST['question']);
 
-    // Tìm kiếm tên nhà xuất bản từ câu hỏi (ví dụ: "sách của nhà xuất bản Giáo Dục")
-    if (strpos($question, 'sách của nhà xuất bản') !== false) {
-        // Lấy tên nhà xuất bản từ câu hỏi
-        $publisherName = trim(str_replace('sách của nhà xuất bản', '', $question));
-        
-        // Truy vấn tìm sách theo nhà xuất bản
+    // Tìm kiếm sách theo nhà xuất bản
+    if (strpos($question, 'Nhà xuất bản') !== false) {
+        $publisherName = trim(str_replace('Nhà xuất bản', '', $question));
         $table_name = $wpdb->prefix . 'books';
+
         $results = $wpdb->get_results(
             $wpdb->prepare(
-                "SELECT * FROM $table_name WHERE publisherName LIKE %s LIMIT 3",
-                '%' . $wpdb->esc_like($publisherName) . '%'
+                "SELECT * FROM $table_name WHERE publisherName LIKE %s LIMIT 5", '%' . $wpdb->esc_like($publisherName) . '%'
             )
         );
 
         if (empty($results)) {
-            wp_send_json_error('Không tìm thấy sách của nhà xuất bản ' . $publisherName);
+            wp_send_json_error('Không tìm thấy Nhà xuất bản bạn muốn ' . $publisherName);
         } else {
             wp_send_json_success($results);
         }
     } else {
-        wp_send_json_error('Câu hỏi không hợp lệ.');
+        wp_send_json_error('Vui lòng nhập thông tin bạn muốn tìm kiếm.');
     }
 
     wp_die();
 }
 
-// Đăng ký action AJAX cho cả người dùng đã đăng nhập và chưa đăng nhập
 add_action('wp_ajax_chatbot_search_books', 'chatbot_search_books_by_question');
 add_action('wp_ajax_nopriv_chatbot_search_books', 'chatbot_search_books_by_question');
 
 
-// Hàm enqueue script cho chatbot load ajax
+// Function enqueue script cho chatbot load ajax
 function chatbot_enqueue_search_books_script() {
     // Enqueue JavaScript file (chatbot-search-books.js)
     wp_enqueue_script(
         'chatbot-search-books', // Tên script
-        plugin_dir_url(__FILE__) . 'assets/js/chatbot-search-books.js', // Đường dẫn đến file JS trong plugin
-        ['jquery'], // Phụ thuộc vào jQuery
-        '1.0', // Phiên bản
-        true // Đặt vào footer
+        plugin_dir_url(__FILE__) . 'assets/js/chatbot-search-books.js',
+        ['jquery'],
+        '1.0',
+        true
     );
 
     // Truyền ajaxUrl từ PHP sang JavaScript
@@ -60,3 +56,18 @@ function chatbot_enqueue_search_books_script() {
     ]);
 }
 add_action('wp_enqueue_scripts', 'chatbot_enqueue_search_books_script');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,36 +1,54 @@
 jQuery(document).ready(function ($) {
 
   // Function process event click
+  // Function process event click
   function sendMessage() {
     const input = document.getElementById('chatInput');
     var question = input.value.trim();
 
     console.log('Function 1', question);
 
+    if (typeof chatbotAjax === 'undefined' || !chatbotAjax.ajaxUrl) { 
+      console.error('AJAX object or AJAX URL is not defined.');
+      return;
+    } else {
+      console.log('Ajax called');   
+    }
+
     if (question) {
-      // Display quesion to Chatbody
+      // Display question to Chatbody
       $('#chatbot-message .chat-body').append('<div class="message sent">' + question + '</div>');
       $('#chatInput').val(''); // clear input text
-
+      console.log(question);
       $.ajax({
         url: chatbotAjax.ajaxUrl,
         type: 'POST',
         data: {
           action: 'chatbot_search_books',
           question: question,
-        },
+        },         
         success: function (response) {
+          console.log('Function 2', response);
+
           if (response.success) {
-            var resultsHtml = '<div class="message received">Dưới đây là kết quả tìm kiếm:</div>';
+            // Build HTML for all results
+            let resultsHtml = '<div class="message received message-search">';
+            resultsHtml += '<div class="label-message">Kết quả tìm kiếm:</div><ul>';
             response.data.forEach(function (book) {
               resultsHtml += `
-                <div class="book-item">
-                <h3>${book.title}</h3>
-                </div>
-                `;
+                <li class="list-item-search">
+                  <a href="/book/${book.id}" target="_blank">
+                    <div class="chatbot-heading-product">${book.title}</div>
+                  </a>
+                </li>
+              `;
             });
+            resultsHtml += '</ul></div>'; // Close the message
+            
+            // Append results as one message
             $('#chatbot-message .chat-body').append(resultsHtml);
           } else {
+            // Display error message from server
             $('#chatbot-message .chat-body').append('<div class="message received">' + response.data + '</div>');
           }
         },
@@ -40,6 +58,7 @@ jQuery(document).ready(function ($) {
       });
     }
   }
+
 
   // Function to remove default question
   function removeDefaultQuestion() {
@@ -63,10 +82,4 @@ jQuery(document).ready(function ($) {
       sendMessage();
     }
   });
-
-
-
-
-
-
 });
