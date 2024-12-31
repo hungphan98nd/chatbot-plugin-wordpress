@@ -50,12 +50,13 @@ function chatbot_enqueue_search_books_script() {
         true
     );
 
-    // Truyền ajaxUrl từ PHP sang JavaScript
     wp_localize_script('chatbot-search-books', 'chatbotAjax', [
-        'ajaxUrl' => admin_url('admin-ajax.php') // URL AJAX của WordPress
+        'ajaxUrl' => admin_url('admin-ajax.php'),
+        'logoUrl' => plugins_url('assets/images/logo.png', __FILE__),
     ]);
 }
 add_action('wp_enqueue_scripts', 'chatbot_enqueue_search_books_script');
+
 
 
 

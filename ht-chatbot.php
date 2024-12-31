@@ -14,7 +14,10 @@ Text Domain: ht-chatbot
 if (!defined('ABSPATH')) {
     exit;
 }
+?>
 
+
+<?php
 // declare url
 define('HT_CHATBOT_PLUGIN_PATH', plugin_dir_path(__FILE__));
 
@@ -69,13 +72,14 @@ function ht_chatbox_render_html() { ?>
     		<div class="header-left">
     			<?php $img_url = plugins_url('assets/images/logo.png', __FILE__); ?>
 				<img class="logo-main" src="<?php echo esc_url($img_url); ?>" alt="Logo">
-				<span class="chat-title">Htecom</span>
+				<span class="chat-title">Htecom AI</span>
     		</div>
     		<button class="chatbot-ai-button-close">&times;</button>
     	</div>
     	<div class="chat-body">
-    		<div class="message received default">
-    			Xin chào! Tôi là người hỗ trợ AI Chat Bot của Htecom. Tôi có thể giúp gì cho bạn?
+    		<div class="message chatbot-logo received default">
+    			<img class="logo-main logo-message" src="<?php echo esc_url($img_url); ?>" alt="Logo">
+    			<div class="text-message">Xin chào! Tôi là người hỗ trợ AI Chat Bot của Htecom. Tôi có thể giúp gì cho bạn?</div>
     		</div>
     		<div class="ai-chatbot-questions-default">
     			<div class="lable">Các câu hỏi thường gặp:</div>

@@ -1,7 +1,6 @@
 jQuery(document).ready(function ($) {
 
   // Function process event click
-  // Function process event click
   function sendMessage() {
     const input = document.getElementById('chatInput');
     var question = input.value.trim();
@@ -19,7 +18,10 @@ jQuery(document).ready(function ($) {
       // Display question to Chatbody
       $('#chatbot-message .chat-body').append('<div class="message sent">' + question + '</div>');
       $('#chatInput').val(''); // clear input text
-      console.log(question);
+
+      // Show loading spinner
+      $('#loading-spinner').show();
+
       $.ajax({
         url: chatbotAjax.ajaxUrl,
         type: 'POST',
@@ -28,37 +30,50 @@ jQuery(document).ready(function ($) {
           question: question,
         },         
         success: function (response) {
-          console.log('Function 2', response);
+
+          // Hide loading spinner
+          $('#loading-spinner').hide();
 
           if (response.success) {
             // Build HTML for all results
-            let resultsHtml = '<div class="message received message-search">';
-            resultsHtml += '<div class="label-message">Kết quả tìm kiếm:</div><ul>';
+            let resultsHtml = `
+              <div class="message received message-search">
+              <img class="logo-main" src="${chatbotAjax.logoUrl}" alt="Logo">
+              <div><div class="label-message">Kết quả tìm kiếm:</div>
+              <ul>
+            `;
+            
             response.data.forEach(function (book) {
               resultsHtml += `
                 <li class="list-item-search">
                   <a href="/book/${book.id}" target="_blank">
-                    <div class="chatbot-heading-product">${book.title}</div>
+                      <div class="chatbot-heading-product">${book.title}</div>
                   </a>
                 </li>
               `;
             });
-            resultsHtml += '</ul></div>'; // Close the message
-            
+
+            resultsHtml += `
+                </ul>
+              </div>
+            </div>
+            `;
             // Append results as one message
             $('#chatbot-message .chat-body').append(resultsHtml);
           } else {
             // Display error message from server
-            $('#chatbot-message .chat-body').append('<div class="message received">' + response.data + '</div>');
+            $('#chatbot-message .chat-body').append(`<div class="message received">${response.data}</div>`);
           }
         },
         error: function () {
+          // Hide loading spinner if error occurs
+          $('#loading-spinner').hide();
+          
           $('#chatbot-message .chat-body').append('<div class="message received">Có lỗi xảy ra. Vui lòng thử lại sau.</div>');
         },
       });
     }
   }
-
 
   // Function to remove default question
   function removeDefaultQuestion() {
