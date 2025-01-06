@@ -1,9 +1,9 @@
 jQuery(document).ready(function ($) {
 
   // Function process event click
-  function sendMessage() {
+  function sendMessage(question) {
     const input = document.getElementById('chatInput');
-    var question = input.value.trim();
+    var question = question || input.value.trim(); 
 
     if (typeof chatbotAjax === 'undefined' || !chatbotAjax.ajaxUrl) { 
       console.error('AJAX object or AJAX URL is not defined.');
@@ -35,7 +35,7 @@ jQuery(document).ready(function ($) {
 
           if (response.success) {
             // Build HTML for all results
-            let resultsHtml = `
+            let resultsHtml = ` 
               <div class="message received message-search">
               <div class="chatbot-logo-ajax"><img class="logo-main" src="${chatbotAjax.logoUrl}" alt="Logo"></div>
               <div><div class="label-message">Kết quả tìm kiếm:</div>
@@ -99,4 +99,16 @@ jQuery(document).ready(function ($) {
       sendMessage();
     }
   });
+
+  // click default message
+  $('.questions-default-1').on('click', function () {
+    removeDefaultQuestion();
+    sendMessage("Nhà xuất bản Khoa Học");
+  });
+
+  $('.questions-default-2').on('click', function () {
+    removeDefaultQuestion(); 
+    sendMessage("CNTT"); 
+  });
+
 });
