@@ -5,8 +5,6 @@ jQuery(document).ready(function ($) {
     const input = document.getElementById('chatInput');
     var question = input.value.trim();
 
-    console.log('Function 1', question);
-
     if (typeof chatbotAjax === 'undefined' || !chatbotAjax.ajaxUrl) { 
       console.error('AJAX object or AJAX URL is not defined.');
       return;
@@ -17,10 +15,14 @@ jQuery(document).ready(function ($) {
     if (question) {
       // Display question to Chatbody
       $('#chatbot-message .chat-body').append('<div class="message sent">' + question + '</div>');
-      $('#chatInput').val(''); // clear input text
+      $('#chatInput').val('');
 
-      // Show loading spinner
-      $('#loading-spinner').show();
+      // Tạo phần tử loading ngay sau tin nhắn vừa gửi
+      const loadingHTML = '<div class="chatbot-loading-message chatbot-box-loader"> <span></span> <span></span> <span></span></div>';
+      $('#chatbot-message .chat-body').append(loadingHTML); // Thêm loading vào container chat
+
+      // Cuộn xuống cuối container chat
+      $('#chatbot-message .chat-body').scrollTop($('#chatbot-message .chat-body')[0].scrollHeight);
 
       $.ajax({
         url: chatbotAjax.ajaxUrl,
@@ -30,15 +32,13 @@ jQuery(document).ready(function ($) {
           question: question,
         },         
         success: function (response) {
-
-          // Hide loading spinner
-          $('#loading-spinner').hide();
+          $('.chatbot-loading-message').remove();
 
           if (response.success) {
             // Build HTML for all results
             let resultsHtml = `
               <div class="message received message-search">
-              <img class="logo-main" src="${chatbotAjax.logoUrl}" alt="Logo">
+              <div class="chatbot-logo-ajax"><img class="logo-main" src="${chatbotAjax.logoUrl}" alt="Logo"></div>
               <div><div class="label-message">Kết quả tìm kiếm:</div>
               <ul>
             `;
@@ -58,19 +58,22 @@ jQuery(document).ready(function ($) {
               </div>
             </div>
             `;
-            // Append results as one message
             $('#chatbot-message .chat-body').append(resultsHtml);
           } else {
-            // Display error message from server
             $('#chatbot-message .chat-body').append(`<div class="message received">${response.data}</div>`);
           }
+
+          // Scroll bottom of chat container
+          $('#chatbot-message .chat-body').scrollTop($('#chatbot-message .chat-body')[0].scrollHeight);
         },
         error: function () {
-          // Hide loading spinner if error occurs
-          $('#loading-spinner').hide();
-          
+          $('.chatbot-loading-message').remove();
+
           $('#chatbot-message .chat-body').append('<div class="message received">Có lỗi xảy ra. Vui lòng thử lại sau.</div>');
-        },
+
+          // Scroll bottom of chat container
+          $('#chatbot-message .chat-body').scrollTop($('#chatbot-message .chat-body')[0].scrollHeight);
+        }
       });
     }
   }

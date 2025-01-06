@@ -24,8 +24,8 @@ body {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-  opacity: 0;
-  transform: translateY(30px);
+/*  opacity: 0;
+  transform: translateY(30px);*/
   transition: all .3s;
   z-index: 998;
 }
@@ -297,4 +297,41 @@ body {
 
 #chatbot-message .list-item-search a:hover {
   color: var(--cb-primary-color);
+}
+
+/*Css loading send message*/
+.chatbot-box-loader {
+
+}
+
+.chatbot-box-loader span {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 100%;
+  background: var(--cb-primary-color);
+  margin: 0 1px;
+  opacity: 0;
+}
+
+.chatbot-box-loader span:nth-child(1) {
+  animation: opacitychange 1s ease-in-out infinite;
+}
+
+.chatbot-box-loader span:nth-child(2) {
+  animation: opacitychange 1s ease-in-out 0.33s infinite;
+}
+
+.chatbot-box-loader span:nth-child(3) {
+  animation: opacitychange 1s ease-in-out 0.66s infinite;
+}
+
+@keyframes opacitychange {
+  0%, 100% {
+    opacity: 0;
+  }
+
+  60% {
+      opacity: 1;
+  }
 }

@@ -40,7 +40,7 @@ function chatbot_search_books_by_question() {
         $error_message = '
             <img src="' . esc_url($logo_url) . '" alt="Logo" class="logo-main logo-message">
             <div class="text-message">
-                Vui lòng nhập thông tin bạn muốn tìm ksiếm.
+                Vui lòng nhập thông tin bạn muốn tìm kiếm.
             </div>  
         ';
         wp_send_json_error($error_message);
