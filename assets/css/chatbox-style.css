@@ -24,8 +24,8 @@ body {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
-/*  opacity: 0;
-  transform: translateY(30px);*/
+  opacity: 0;
+  transform: translateY(30px);
   transition: all .3s;
   z-index: 998;
 }
@@ -301,7 +301,7 @@ body {
 
 /*Css loading send message*/
 .chatbot-box-loader {
-
+  
 }
 
 .chatbot-box-loader span {
@@ -332,6 +332,6 @@ body {
   }
 
   60% {
-      opacity: 1;
+    opacity: 1;
   }
 }
