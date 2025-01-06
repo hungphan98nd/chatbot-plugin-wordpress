@@ -21,16 +21,30 @@ function chatbot_search_books_by_question() {
             $wpdb->prepare(
                 "SELECT * FROM $table_name WHERE publisherName LIKE %s LIMIT 5", '%' . $wpdb->esc_like($publisherName) . '%'
             )
-        );
+        );  
 
         if (empty($results)) {
-            wp_send_json_error('Không tìm thấy Nhà xuất bản bạn muốn ' . $publisherName);
+            $logo_url = plugins_url('assets/images/logo.png', __FILE__);
+            $error_message = '
+                <img src="' . esc_url($logo_url) . '" alt="Logo" class="logo-main logo-message">
+                <div class="text-message">
+                    Không tìm thấy thông tin bạn muốn tìm kiếm. Vui lòng nhập lại.
+                </div>
+            ';
+            wp_send_json_error($error_message);
         } else {
             wp_send_json_success($results);
         }
     } else {
-        wp_send_json_error('Vui lòng nhập thông tin bạn muốn tìm kiếm.');
-    }
+        $logo_url = plugins_url('assets/images/logo.png', __FILE__);
+        $error_message = '
+            <img src="' . esc_url($logo_url) . '" alt="Logo" class="logo-main logo-message">
+            <div class="text-message">
+                Vui lòng nhập thông tin bạn muốn tìm ksiếm.
+            </div>  
+        ';
+        wp_send_json_error($error_message);
+    }   
 
     wp_die();
 }
@@ -56,19 +70,3 @@ function chatbot_enqueue_search_books_script() {
     ]);
 }
 add_action('wp_enqueue_scripts', 'chatbot_enqueue_search_books_script');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

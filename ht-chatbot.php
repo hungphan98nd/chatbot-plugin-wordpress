@@ -27,7 +27,6 @@ register_deactivation_hook(__FILE__, 'ht_chatbot_deactivate');
 
 // Perform actions when activing plugin
 function ht_chatbot_activate() {
-    chatbot_conversations_table(); 
     create_books_table();
 }
 
@@ -79,7 +78,7 @@ function ht_chatbox_render_html() { ?>
     	<div class="chat-body">
     		<div class="message chatbot-logo received default">
     			<img class="logo-main logo-message" src="<?php echo esc_url($img_url); ?>" alt="Logo">
-    			<div class="text-message">Xin chào! Tôi là người hỗ trợ AI Chat Bot của Htecom. Tôi có thể giúp gì cho bạn?</div>
+    			<div class="text-message">👋 Xin chào! Tôi là người hỗ trợ AI Chat Bot của Htecom. Tôi có thể giúp gì cho bạn?</div>
     		</div>
     		<div class="ai-chatbot-questions-default">
     			<div class="lable">Các câu hỏi thường gặp:</div>
@@ -107,28 +106,6 @@ function ht_chatbot_enqueue_assets() {
     wp_enqueue_script('ht-chatbot-script', plugin_dir_url(__FILE__) . 'assets/js/main.js', array('jquery'), null, true);
 }
 add_action('wp_enqueue_scripts', 'ht_chatbot_enqueue_assets');
-
-// Create new table for database
-function chatbot_conversations_table() {
-    global $wpdb;
-    $table_name = $wpdb->prefix . 'ht_chatbot_conversations';
-    $charset_collate = $wpdb->get_charset_collate();
-
-    $sql = "CREATE TABLE $table_name (
-        id BIGINT(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-        user_id BIGINT(20) UNSIGNED DEFAULT NULL,
-        session_id VARCHAR(255) NOT NULL,
-        message TEXT NOT NULL,
-        sender ENUM('user', 'chatbot') NOT NULL,
-        timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
-        PRIMARY KEY (id),
-        KEY session_id (session_id),
-        KEY user_id (user_id)
-    ) $charset_collate;";
-
-    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-    dbDelta($sql);
-}
 
 // Create new table books
 function create_books_table() {

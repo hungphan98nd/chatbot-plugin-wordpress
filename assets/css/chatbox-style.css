@@ -148,7 +148,8 @@ body {
   position: relative;
 }
 
-.message.chatbot-logo {
+.message.chatbot-logo,
+.message.received {
   display: flex;
   align-items: flex-start;
 }
