@@ -17,11 +17,10 @@ jQuery(document).ready(function ($) {
       $('#chatbot-message .chat-body').append('<div class="message sent">' + question + '</div>');
       $('#chatInput').val('');
 
-      // Tạo phần tử loading ngay sau tin nhắn vừa gửi
       const loadingHTML = '<div class="chatbot-loading-message chatbot-box-loader"> <span></span> <span></span> <span></span></div>';
-      $('#chatbot-message .chat-body').append(loadingHTML); // Thêm loading vào container chat
+      $('#chatbot-message .chat-body').append(loadingHTML);
 
-      // Cuộn xuống cuối container chat
+      // Scroll down to the bottom of the chat container
       $('#chatbot-message .chat-body').scrollTop($('#chatbot-message .chat-body')[0].scrollHeight);
 
       $.ajax({
