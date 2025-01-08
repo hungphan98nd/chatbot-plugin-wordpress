@@ -138,6 +138,10 @@ body {
   color: var(--cb-secondary-color) !important;
 }
 
+.message.received.default:before {
+  display: none;
+}
+
 .message.received {
   background: var(--cb-primary-bg-color);
   align-self: flex-start;
